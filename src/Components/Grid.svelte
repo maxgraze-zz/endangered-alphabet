@@ -1,6 +1,7 @@
 <script>
 	import Scripts from "../Scripts/index.svelte";
 	import { fade } from "svelte/transition";
+	import App from "../App.svelte";
 
 	/*
     TODO:
@@ -14,9 +15,8 @@
     */
 
 	// export let education = false;
-	export let signage, education, print, broadcast;
-
-	$: console.log(education);
+	//export let signage, education, print, broadcast;
+	export let visibleCategories = {};
 
 	let scripts = [
 		{ name: "CAS", cat: "broadcast" },
@@ -40,70 +40,13 @@
 </label> -->
 <div class="grid">
 	{#each scripts as script}
-		{#if !education && script.cat === "education"}
-			<div transition:fade|local class="box">
-				<Scripts name={script.name} />
-			</div>
-		{:else if education && script.cat === "education"}
-			<div class="box">
-				<Scripts name="blank" />
-			</div>
-		{/if}
-		{#if !print && script.cat === "print"}
-			<div class="box">
-				<Scripts name={script.name} />
-			</div>
-		{:else if print && script.cat === "print"}
-			<div class="box">
-				<Scripts name="blank" />
-			</div>
-		{/if}
-		{#if !signage && script.cat === "signage"}
-			<div class="box">
-				<Scripts name={script.name} />
-			</div>
-		{:else if signage && script.cat === "signage"}
-			<div class="box">
-				<Scripts name="blank" />
-			</div>
-		{/if}
-		{#if !broadcast && script.cat === "broadcast"}
-			<div class="box">
-				<Scripts name={script.name} />
-			</div>
-		{:else if broadcast && script.cat === "broadcast"}
-			<div class="box">
-				<Scripts name="blank" />
-			</div>
-		{/if}
+		<div transition:fade|local class="box">
+			<Scripts name={!visibleCategories[script.cat] ? script.name : "blank"} />
+		</div>
 	{/each}
-	<!-- <div class="broadcast">
-		<Scripts name="CAS" />
-	</div>
-	<div class="education">
-		<Scripts name="manchu" />
-	</div>
-	<div class="print">
-		<Scripts name="mandaic" />
-	</div>
-	<div class="broadcast">
-		<Scripts name="ol-chiki" />
-	</div>
-	<div class="education">
-		<Scripts name="ranja" />
-	</div>
-	<div class="signage">
-		<Scripts name="shuishu" />
-	</div>
-	<div class="education">
-		<Scripts name="tifinagh" />
-	</div>
-	<div class="print">
-		<Scripts name="western-cham" />
-	</div>
-	<div class="broadcast">
-		<Scripts name="yi" />
-	</div> -->
+	{#if visibleCategories.broadcast === true}
+		<div class="box stack-top">I'm a div</div>
+	{/if}
 </div>
 
 <style>
@@ -117,9 +60,19 @@
 		margin: auto;
 		aspect-ratio: 1;
 		width: 40%;
+		position: relative;
 	}
 	/* this doesn't work */
 	.grid .box {
 		border: 1px dashed rgb(100, 100, 100);
+	}
+
+	.stack-top {
+		z-index: 10;
+		width: 400px;
+		height: 400px;
+		background-color: yellow;
+		position: absolute;
+		text-align: center;
 	}
 </style>

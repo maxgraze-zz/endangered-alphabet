@@ -1,4 +1,5 @@
 <script>
+	import { fade } from "svelte/transition";
 	export let name;
 	export let width = "100%";
 	export let height = "100%";
@@ -191,7 +192,7 @@
 			svg: ``,
 		},
 	];
-	let displayScript = scripts.find((e) => e.name === name);
+	$: displayScript = scripts.find((e) => e.name === name);
 </script>
 
 <svg
@@ -200,7 +201,13 @@
 	{width}
 	{height}
 	viewBox="0 0 {displayScript.box} {displayScript.box}"
-	preserveAspectRatio="xMidYMid meet">{@html displayScript.svg}</svg
+	preserveAspectRatio="xMidYMid meet"
 >
+	{#key name}
+		<g transition:fade>
+			{@html displayScript.svg}
+		</g>
+	{/key}
+</svg>
 
 <style></style>
