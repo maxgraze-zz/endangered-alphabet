@@ -1,6 +1,8 @@
 <script>
-	import Scripts from "../Scripts/index.svelte";
-	import { fade } from "svelte/transition";
+	import Scripts from "../scripts/index.svelte";
+	import { fade, fly } from "svelte/transition";
+	import { backInOut } from "svelte/easing";
+	import { tooltip } from "../actions/tooltip";
 	import App from "../App.svelte";
 
 	/*
@@ -31,6 +33,7 @@
 	];
 	// const index = scripts.index(item);
 	// if (~index) scripts["blank"];
+	//not sure if local makes a difference, does not stagger
 </script>
 
 <!-- <div class="wrapper"> -->
@@ -39,13 +42,19 @@
 	<input type="checkbox" bind:checked={education} />
 </label> -->
 <div class="grid">
-	{#each scripts as script}
-		<div transition:fade|local class="box">
+	{#each scripts as script, i}
+		<div
+			transition:fade|local={{
+				delay: i * 500,
+			}}
+			use:tooltip={script}
+			class="box"
+		>
 			<Scripts name={!visibleCategories[script.cat] ? script.name : "blank"} />
 		</div>
 	{/each}
-	{#if visibleCategories.broadcast === true}
-		<div class="box stack-top">I'm a div</div>
+	{#if visibleCategories.image === true}
+		<div transition:fade={{ opacity: 0.2, duration: 700 }} class="stack-top" />
 	{/if}
 </div>
 
@@ -69,9 +78,10 @@
 
 	.stack-top {
 		z-index: 10;
-		width: 400px;
-		height: 400px;
-		background-color: yellow;
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-image: url("https://www.endangeredalphabets.net/wp-content/uploads/2018/12/Mandaic-Sample-Text.jpg");
 		position: absolute;
 		text-align: center;
 	}

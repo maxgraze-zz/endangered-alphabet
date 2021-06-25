@@ -1,5 +1,7 @@
 <script>
-	import { fade } from "svelte/transition";
+	import { fade, draw } from "svelte/transition";
+	// import { tooltip } from "../utils/tooltip";
+
 	export let name;
 	export let width = "100%";
 	export let height = "100%";
