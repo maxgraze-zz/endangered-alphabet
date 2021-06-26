@@ -3,6 +3,8 @@
 	import Grid from "./components/Grid.svelte";
 	import { fade, fly } from "svelte/transition";
 	import Matrix from "./components/Matrix.svelte";
+	import lazyimage from "./actions/lazyimage";
+	import viewport from "./actions/useViewportAction";
 
 	export let scroller;
 	let index, offset, progress;
@@ -163,7 +165,7 @@
 					or apathy; perhaps forces more complex and sinister.
 				</blockquote>
 				<br />
-				<span id="lauret"><i>- Lauret Savoy</i></span>
+				<cite>- Lauret Savoy</cite>
 			</section>
 			<section id="s7" />
 			<section id="s8">
@@ -173,6 +175,7 @@
 			<img
 				in:fly|local={{ duration: 500, delay: 300 }}
 				src="/images/endangered-ratio.png"
+				alt="50% of languages are endangered and 85% of scripts as well"
 			/> <br />
 			<h2 class="end">
 				Whatever the reason for its neglectedness, we at the <a
@@ -203,12 +206,6 @@
 		font-family: brandon-grotesque, sans-serif;
 	}
 
-	.rect {
-		background-color: antiquewhite;
-		/* width: 50%;
-		height: 50%; */
-	}
-
 	section {
 		height: 80vh;
 		line-height: 2em;
@@ -236,43 +233,47 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
-
 	blockquote {
-		color: #2c3e50;
-		font-size: 2em;
-		line-height: 100%;
+		font-weight: 100;
+		font-size: 2rem;
+		max-width: 600px;
+		line-height: 1.4;
 		position: relative;
-		font-family: Georgia, serif;
-		/* width: 300px; */
-		margin: 10% auto;
+		margin: 0;
+		padding: 0.5rem;
+		text-align: center;
 	}
-	blockquote::before {
-		content: "\201C";
+
+	blockquote:before,
+	blockquote:after {
 		position: absolute;
-		top: -10px;
-		left: 0;
-		font-family: Arial, sans-serif;
-		font-size: 4em;
-		font-style: normal;
+		color: #f1efe6;
+		font-size: 8rem;
+		width: 4rem;
+		height: 4rem;
 	}
-	blockquote::after {
-		content: "\201C";
-		position: absolute;
-		bottom: -60px;
-		right: 0;
-		font-family: Arial, sans-serif;
-		font-size: 4em;
-		font-style: normal;
+
+	blockquote:before {
+		content: "“";
+		left: -3rem;
+		top: -2rem;
 	}
-	#lauret {
+
+	blockquote:after {
+		content: "”";
+		right: -3rem;
+		bottom: 1rem;
+	}
+
+	cite {
+		line-height: 3;
 		float: right;
-		font-size: 2em;
 	}
 
 	.end {
 		font-size: 2em;
 		padding: 20vh 13vh;
-		color: #ff3e00;
+		color: #353535;
 		font-family: brandon-grotesque, sans-serif;
 		font-weight: 400;
 	}
