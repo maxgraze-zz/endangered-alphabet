@@ -1,5 +1,7 @@
 <script>
-	import Scroller from "./utils/Scroller.svelte";
+	// import Scroller from "./utils/Scroller.svelte";
+	import Scroller from "@sveltejs/svelte-scroller";
+
 	import Grid from "./components/Grid.svelte";
 	import { fade, fly } from "svelte/transition";
 	import Matrix from "./components/Matrix.svelte";
