@@ -4,9 +4,6 @@
 
 	import Grid from "./components/Grid.svelte";
 	import { fade, fly } from "svelte/transition";
-	import Matrix from "./components/Matrix.svelte";
-	import lazyimage from "./actions/lazyimage";
-	import viewport from "./actions/useViewportAction";
 
 	export let scroller;
 	let index, offset, progress;
