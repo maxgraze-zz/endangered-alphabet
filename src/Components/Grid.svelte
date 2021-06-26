@@ -3,7 +3,6 @@
 	import { fade, fly } from "svelte/transition";
 	import { backInOut } from "svelte/easing";
 	import { tooltip } from "../actions/tooltip";
-	import App from "../App.svelte";
 
 	/*
     TODO:
