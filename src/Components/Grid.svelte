@@ -42,17 +42,21 @@
 	<input type="checkbox" bind:checked={education} />
 </label> -->
 <div class="grid">
-	{#each scripts as script, i}
-		<div
-			transition:fade|local={{
-				delay: i * 500,
-			}}
-			use:tooltip={script}
-			class="box"
-		>
-			<Scripts name={!visibleCategories[script.cat] ? script.name : "blank"} />
-		</div>
-	{/each}
+	{#if !visibleCategories.end}
+		{#each scripts as script, i}
+			<div
+				transition:fade|local={{
+					delay: i * 500,
+				}}
+				use:tooltip={script}
+				class="box"
+			>
+				<Scripts
+					name={!visibleCategories[script.cat] ? script.name : "blank"}
+				/>
+			</div>
+		{/each}
+	{/if}
 	{#if visibleCategories.image === true}
 		<div transition:fade={{ opacity: 0.2, duration: 700 }} class="stack-top" />
 	{/if}
@@ -81,7 +85,8 @@
 		width: 100%;
 		height: 100%;
 		background-size: cover;
-		background-image: url("https://www.endangeredalphabets.net/wp-content/uploads/2018/12/Mandaic-Sample-Text.jpg");
+		background-image: url("https://www.endangeredalphabets.net/wp-content/uploads/2018/12/Adlam-Taught-in-Nigerian-Classroom.jpg");
+		/* background-image: url("https://www.endangeredalphabets.net/wp-content/uploads/2018/12/Mandaic-Sample-Text.jpg"); */
 		position: absolute;
 		text-align: center;
 	}

@@ -1,7 +1,7 @@
 <script>
 	import Scroller from "./utils/Scroller.svelte";
 	import Grid from "./components/Grid.svelte";
-	import { fade } from "svelte/transition";
+	import { fade, fly } from "svelte/transition";
 	import Matrix from "./components/Matrix.svelte";
 
 	export let scroller;
@@ -69,6 +69,14 @@
 			broadcast: false,
 			image: false,
 		},
+		{
+			signage: false,
+			education: false,
+			print: false,
+			broadcast: false,
+			image: false,
+			end: true,
+		},
 	];
 	$: props = steps[index];
 
@@ -108,13 +116,18 @@
 					>
 					<br />
 					<br />
-					<span in:fade|local={{ delay: 3000 }}
-						>It boils down to the fact that we don't know how many are in use
-						and how many aren't. There's not even a formal way to measure
-						scripts in the goal of knowing if they are "in use" or extinct. So
-						we, at the<a
-							href="https://www.endangeredalphabets.net/"
-							target="_blank">Endangered Alphabet Projects</a
+					<span in:fade|local={{ delay: 3000 }}>
+						It boils down to the fact that we don't know how many are in use and
+						how many aren't. We are facing a <b>neglected</b> dataset. There's not
+						even a formal way to measure scripts in the goal of knowing if they are
+						"in use" or extinct.
+					</span>
+					<br />
+					<br />
+					<span in:fade|local={{ delay: 7000, duration: 400 }}>
+						So we, at the
+						<a href="https://www.endangeredalphabets.net/" target="_blank"
+							>Endangered Alphabet Projects</a
 						> started to make a "criterias for health" list, which aims to solve
 						this issue. But before we can measure their level of endangerment, we
 						need their data. We need the experiences and voices of their writers
@@ -142,17 +155,34 @@
 			</section>
 			<section id="s6">
 				We know bits and pieces, but we don't know the whole story.
+				<br />
+				<br />
+				<br />
+				<blockquote>
+					Neglect may reflect many things: commitment but lack of means; amnesia
+					or apathy; perhaps forces more complex and sinister.
+				</blockquote>
+				<br />
+				<span id="lauret"><i>- Lauret Savoy</i></span>
 			</section>
 			<section id="s7" />
 			<section id="s8">
 				But with our collaborators, and our friends, we can fill these in.
 			</section>
 			<section id="s9" />
+			<img
+				in:fly|local={{ duration: 500, delay: 300 }}
+				src="/images/endangered-ratio.png"
+			/> <br />
+			<h2 class="end">
+				Whatever the reason for its neglectedness, we at the <a
+					href="https://www.endangeredalphabets.com/"
+				>
+					Endangered Alphabets Project</a
+				> are going to fill in this missing dataset.
+			</h2>
 		</div>
-
-		<h1>hola</h1>
 	</Scroller>
-	<h1>and again</h1>
 </div>
 
 <style>
@@ -170,6 +200,7 @@
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;
+		font-family: brandon-grotesque, sans-serif;
 	}
 
 	.rect {
@@ -180,7 +211,6 @@
 
 	section {
 		height: 80vh;
-		/* padding: 10vh; */
 		line-height: 2em;
 		width: 50%;
 		font-family: brandon-grotesque, sans-serif;
@@ -190,12 +220,60 @@
 
 	a:hover,
 	a:active {
-		background-color: #faf38da6;
-		color: rgb(8, 64, 129);
+		color: rgba(253, 229, 11, 0.966);
+		background-color: rgb(30, 106, 194);
 	}
 
 	a {
+		background-color: rgba(253, 229, 11, 0.507);
+		color: rgb(30, 106, 194);
 		text-decoration: none;
-		color: black;
+	}
+
+	img {
+		transform: scale(1.25);
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	blockquote {
+		color: #2c3e50;
+		font-size: 2em;
+		line-height: 100%;
+		position: relative;
+		font-family: Georgia, serif;
+		/* width: 300px; */
+		margin: 10% auto;
+	}
+	blockquote::before {
+		content: "\201C";
+		position: absolute;
+		top: -10px;
+		left: 0;
+		font-family: Arial, sans-serif;
+		font-size: 4em;
+		font-style: normal;
+	}
+	blockquote::after {
+		content: "\201C";
+		position: absolute;
+		bottom: -60px;
+		right: 0;
+		font-family: Arial, sans-serif;
+		font-size: 4em;
+		font-style: normal;
+	}
+	#lauret {
+		float: right;
+		font-size: 2em;
+	}
+
+	.end {
+		font-size: 2em;
+		padding: 20vh 13vh;
+		color: #ff3e00;
+		font-family: brandon-grotesque, sans-serif;
+		font-weight: 400;
 	}
 </style>
