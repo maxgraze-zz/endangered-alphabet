@@ -1,5 +1,6 @@
 <script>
 	import { onDestroy, setContext, createEventDispatcher } from "svelte";
+	import { draw } from "svelte/transition";
 	import { setupCanvas } from "../utils/canvas";
 	export let width = 0;
 	export let height = 0;
@@ -24,6 +25,7 @@
 			frameId = requestAnimationFrame(update);
 		},
 	});
+	console.log(drawFunctions);
 	function handleClick(e) {
 		const { layerX: x, layerY: y } = e;
 		dispatch("click", {

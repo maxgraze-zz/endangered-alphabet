@@ -1,53 +1,54 @@
 <script>
-	import { onMount } from "svelte";
+	import { getContext, onMount, onDestroy, afterUpdate } from "svelte";
+
 	const { register, deregister, invalidate } = getContext("canvas");
 
-	let canvas;
-	let context;
-	let width = 500;
-	let height = 500;
+	let xMargin, yMargin, dotDiameter;
+	let parentWidth = 500;
+	let parentHeight = 500;
 
-	$: (width, height), draw();
+	// $: (width, height), draw();
 
-	const draw = () => {
-		if (!canvas) return;
+	function draw(ctx) {
+		console.log("drawing");
+		//if (!canvas) return;
 		let ethnologueColor = "green";
 		let omniglotColor = "red";
 		let noScripts = "grey";
-		var dotMargin = 25;
-		var numRows = 70;
-		var numCols = 100;
+		let dotMargin = 25;
+		let numRows = 70;
+		let numCols = 100;
 		let totalDots = numRows * numCols;
-		var context = canvas.getContext("2d");
+		// let context = canvas.getContext("2d");
 
 		// Because we don't know which direction (x vs. y) is the limiting sizing
 		// factor, we'll calculate both first.
-		var dotWidth = (width - 2 * dotMargin) / numCols - dotMargin;
-		var dotHeight = (height - 2 * dotMargin) / numRows - dotMargin;
+		let dotWidth = (parentWidth - 2 * dotMargin) / numCols - dotMargin;
+		let dotHeight = (parentHeight - 2 * dotMargin) / numRows - dotMargin;
 
 		// Now, we use the limiting dimension to set the diameter.
 
 		if (dotWidth > dotHeight) {
-			var dotDiameter = dotHeight;
-			var xMargin = dotMargin;
-			var yMargin = dotMargin;
+			let dotDiameter = dotHeight;
+			let xMargin = dotMargin;
+			let yMargin = dotMargin;
 		} else {
-			var dotDiameter = dotWidth;
-			var xMargin = dotMargin;
-			var yMargin =
-				(height - (2 * dotMargin + numRows * dotDiameter)) / numRows;
+			let dotDiameter = dotWidth;
+			let xMargin = dotMargin;
+			let yMargin =
+				(parentHeight - (2 * dotMargin + numRows * dotDiameter)) / numRows;
 		}
 		let dotRadius = 1;
-		//var dotRadius = dotDiameter * 0.5;
+		//let dotRadius = dotDiameter * 0.5;
 		let count = 0;
 		let ratio = 34;
 		let ratio2 = 4063;
 
-		for (var i = 0; i < numRows; i++) {
-			for (var j = 0; j < numCols; j++) {
-				var x =
+		for (let i = 0; i < numRows; i++) {
+			for (let j = 0; j < numCols; j++) {
+				let x =
 					j * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
-				var y =
+				let y =
 					i * (dotDiameter + yMargin) + dotMargin + yMargin / 2 + dotRadius;
 				// Grab a random color from the array.
 				let color =
@@ -62,15 +63,25 @@
 		}
 
 		function drawDot(x, y, radius, color) {
-			context.beginPath();
-			context.arc(x, y, radius, 0, 2 * Math.PI, false);
-			context.fillStyle = color;
-			context.fill();
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+			ctx.fillStyle = color;
+			ctx.fill();
 		}
-	};
+	}
+
+	onMount(() => {
+		invalidate();
+		register(draw);
+		return () => {
+			deregister(draw);
+		};
+	});
+	afterUpdate(invalidate);
+	onDestroy(invalidate);
 </script>
 
-<div class="container" bind:clientWidth={width} bind:clientHeight={height}>
+<!-- <div class="container" bind:clientWidth={width} bind:clientHeight={height}>
 	<canvas bind:this={canvas} {width} {height} />
 </div>
 
@@ -82,4 +93,4 @@
 	canvas {
 		border: 1px solid red;
 	}
-</style>
+</style> -->

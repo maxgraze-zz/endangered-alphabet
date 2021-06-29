@@ -1,12 +1,18 @@
 <script>
 	// import Scroller from "./utils/Scroller.svelte";
 	import Scroller from "@sveltejs/svelte-scroller";
+	// import Canvas from "./components/Canvas.svelte";
+	// import Matrix from "./components/Matrix.svelte";
 
 	import Grid from "./components/Grid.svelte";
 	import { fade, fly } from "svelte/transition";
+	// import viewport from "./actions/useViewportAction";
 
 	export let scroller;
 	let index, offset, progress;
+
+	let width = 0;
+	let height = 0;
 	let visible = false;
 	setTimeout(() => (visible = true), 1000);
 	//education: tifingah, manchu, rajna,
@@ -87,9 +93,11 @@
 <head>
 	<link rel="stylesheet" href="https://use.typekit.net/csj5pkv.css" />
 </head>
-<div class="wrapper">
+<div class="wrapper" bind:clientWidth={width} bind:clientHeight={height}>
 	<h1>Signs of Life</h1>
-	<!-- <Matrix /> -->
+	<!-- <Canvas {width} {height}>
+		<Matrix />
+	</Canvas> -->
 	<Scroller
 		top={0.2}
 		bottom={0.8}
@@ -113,7 +121,7 @@
 				{#if visible}
 					<span in:fade|local>Numbers range from <b>34</b> </span>
 					<span in:fade|local={{ delay: 1000 }}
-						>to <b>4,065</b> from different sources.</span
+						>to <b>4,065</b> depending on the source.</span
 					>
 					<br />
 					<br />
@@ -121,7 +129,7 @@
 						It boils down to the fact that we don't know how many are in use and
 						how many aren't. We are facing a <b>neglected</b> dataset. There's not
 						even a formal way to measure scripts in the goal of knowing if they are
-						"in use" or extinct.
+						'in use' or extinct.
 					</span>
 					<br />
 					<br />
@@ -171,18 +179,20 @@
 				But with our collaborators, and our friends, we can fill these in.
 			</section>
 			<section id="s9" />
-			<img
-				in:fly|local={{ duration: 500, delay: 300 }}
-				src="/images/endangered-ratio.png"
-				alt="50% of languages are endangered and 85% of scripts as well"
-			/> <br />
-			<h2 class="end">
-				Whatever the reason for its neglectedness, we at the <a
-					href="https://www.endangeredalphabets.com/"
-				>
-					Endangered Alphabets Project</a
-				> are going to fill in this missing dataset.
-			</h2>
+			<div>
+				<img
+					in:fly|local={{ duration: 500, delay: 300 }}
+					src="/images/endangered-ratio.png"
+					alt="50% of languages are endangered and 85% of scripts as well"
+				/> <br />
+				<h2 class="end">
+					Whatever the reason for its neglectedness, we at the <a
+						href="https://www.endangeredalphabets.com/"
+					>
+						Endangered Alphabets Project</a
+					> are going to fill in this missing dataset.
+				</h2>
+			</div>
 		</div>
 	</Scroller>
 </div>
