@@ -2,7 +2,7 @@
 	import Scripts from "../scripts/index.svelte";
 	import { fade, fly } from "svelte/transition";
 	import { backInOut } from "svelte/easing";
-	import { tooltip } from "../actions/tooltip";
+	// import { tooltip } from "../actions/tooltip";
 
 	/*
     TODO:
@@ -33,13 +33,11 @@
 	// const index = scripts.index(item);
 	// if (~index) scripts["blank"];
 	//not sure if local makes a difference, does not stagger
+
+	//use:tooltip={script}
+	//class="box"
 </script>
 
-<!-- <div class="wrapper"> -->
-<!-- <img src={scripts.yi} alt="yi script" /> -->
-<!-- <label>
-	<input type="checkbox" bind:checked={education} />
-</label> -->
 <div class="grid">
 	{#if !visibleCategories.end}
 		{#each scripts as script, i}
@@ -47,8 +45,6 @@
 				transition:fade|local={{
 					delay: i * 500,
 				}}
-				use:tooltip={script}
-				class="box"
 			>
 				<Scripts
 					name={!visibleCategories[script.cat] ? script.name : "blank"}
