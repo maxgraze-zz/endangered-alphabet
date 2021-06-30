@@ -1,5 +1,5 @@
 <script>
-	import Scripts from "../scripts/index.svelte";
+	import Scripts from "../Scripts/index.svelte";
 	import { fade, fly } from "svelte/transition";
 	import { backInOut } from "svelte/easing";
 	// import { tooltip } from "../actions/tooltip";
