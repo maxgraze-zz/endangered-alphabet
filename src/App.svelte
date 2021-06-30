@@ -4,7 +4,7 @@
 	// import Canvas from "./components/Canvas.svelte";
 	// import Circle from "./components/Circle.svelte";
 
-	import Grid from "/components/Grid.svelte";
+	import Grid from "./components/Grid.svelte";
 	import { fade, fly } from "svelte/transition";
 	// import viewport from "./actions/useViewportAction";
 
@@ -309,12 +309,12 @@
 		text-decoration: none;
 	}
 
-	img {
+	/*img {
 		transform: scale(1.25);
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-	}
+	} */
 	blockquote {
 		font-weight: 100;
 		font-size: 2rem;

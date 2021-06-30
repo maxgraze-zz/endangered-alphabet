@@ -1,5 +1,5 @@
 <script>
-	import Scripts from "../Scripts/index.svelte";
+	import SriptSquare from "../scripts/index.svelte";
 	import { fade, fly } from "svelte/transition";
 	import { backInOut } from "svelte/easing";
 	// import { tooltip } from "../actions/tooltip";
@@ -46,7 +46,7 @@
 					delay: i * 500,
 				}}
 			>
-				<Scripts
+				<SriptSquare
 					name={!visibleCategories[script.cat] ? script.name : "blank"}
 				/>
 			</div>
@@ -69,10 +69,6 @@
 		aspect-ratio: 1;
 		width: 40%;
 		position: relative;
-	}
-	/* this doesn't work */
-	.grid .box {
-		border: 1px dashed rgb(100, 100, 100);
 	}
 
 	.stack-top {
