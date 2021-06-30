@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 	import { onDestroy, setContext, createEventDispatcher } from "svelte";
 	import { draw } from "svelte/transition";
 	import { setupCanvas } from "../utils/canvas";
@@ -25,7 +25,6 @@
 			frameId = requestAnimationFrame(update);
 		},
 	});
-	console.log(drawFunctions);
 	function handleClick(e) {
 		const { layerX: x, layerY: y } = e;
 		dispatch("click", {
@@ -59,4 +58,44 @@
 		position: absolute;
 		z-index: 10;
 	}
-</style>
+</style> -->
+<script>
+	import { onMount, setContext } from "svelte";
+	let canvas;
+	export let height;
+	export let width;
+	const drawFunctions = [];
+
+	setContext("canvas", {
+		register(drawFn) {
+			drawFunctions.push(drawFn);
+		},
+		unregister(drawFn) {
+			drawFunctions.splice(drawFunctions.indexOf(drawFn), 1);
+		},
+	});
+	onMount(() => {
+		const context = canvas.getContext("2d");
+		canvas.height = height;
+		canvas.width = width;
+		// Set the colors you want to support in this array
+		const colors = [
+			"#F03C69",
+			"#FFCD32",
+			"#2BAD5D",
+			"#2ABABF",
+			"#CDDC28",
+			"#B91E8C",
+		];
+		const canvasWidth = width;
+		const canvasHeight = height; // this one is new
+
+		drawFunctions.forEach((drawFn) => {
+			drawFn(context);
+		});
+	});
+</script>
+
+<canvas bind:this={canvas} />
+
+<slot />
