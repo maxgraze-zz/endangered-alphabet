@@ -1,10 +1,10 @@
 <script>
 	// import Scroller from "./utils/Scroller.svelte";
 	import Scroller from "@sveltejs/svelte-scroller";
-	import Canvas from "./components/Canvas.svelte";
-	import Circle from "./components/Circle.svelte";
+	// import Canvas from "./components/Canvas.svelte";
+	// import Circle from "./components/Circle.svelte";
 
-	import Grid from "./components/Grid.svelte";
+	import Grid from "/components/Grid.svelte";
 	import { fade, fly } from "svelte/transition";
 	// import viewport from "./actions/useViewportAction";
 
@@ -112,7 +112,7 @@
 </head>
 <div class="wrapper" bind:clientWidth={width} bind:clientHeight={height}>
 	<h1>Signs of Life</h1>
-	<Canvas height={canvasWidth} width={canvasHeight}>
+	<!-- <Canvas height={canvasWidth} width={canvasHeight}>
 		{#each { length: numRows } as _, i (i)}
 			{#each { length: numCols } as _, j (j)}
 				<Circle
@@ -127,7 +127,7 @@
 				/>
 			{/each}
 		{/each}
-	</Canvas>
+	</Canvas> -->
 	<!-- <Canvas {width} {height}>
 		<Matrix />
 	</Canvas> -->
@@ -140,7 +140,7 @@
 		bind:progress
 	>
 		<div class="background" slot="background">
-			<!-- <Grid visibleCategories={steps[index]} /> -->
+			<Grid visibleCategories={steps[index]} />
 		</div>
 		<div class="foreground" slot="foreground">
 			<!-- {#each steps as step, i}
